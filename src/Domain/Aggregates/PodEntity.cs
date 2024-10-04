@@ -43,7 +43,7 @@ public sealed class PodEntity : Entity<Guid>, IAggregateRoot
             AddPodMetrics(obj);
     }
 
-    public void RemovePodMetric(PodMetrics metrics)
+    public void RemovePodMetrics(PodMetrics metrics)
     {
         _metrics.Remove(metrics);
 
@@ -55,6 +55,6 @@ public sealed class PodEntity : Entity<Guid>, IAggregateRoot
     public void RemovePodMetric(IEnumerable<PodMetrics> metrics)
     {
         foreach (var obj in metrics)
-            RemovePodMetric(obj);
+            RemovePodMetrics(obj);
     }
 }

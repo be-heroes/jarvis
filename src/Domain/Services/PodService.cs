@@ -87,7 +87,7 @@ public sealed class PodService(IPodEntityRepository podEntityRepository) : IPodS
                 query = query.Where(ci => ci.Label == label);
 
             foreach (var metrics in query.AsEnumerable())
-                entity.RemovePodMetric(metrics);
+                entity.RemovePodMetrics(metrics);
 
             await UpdatePodEntityAsync(entity, ct);
 
