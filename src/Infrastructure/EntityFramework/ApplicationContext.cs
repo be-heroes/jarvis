@@ -11,7 +11,9 @@ public class ApplicationContext : EntityContext
     {
     }
 #pragma warning restore CS8625
-    public virtual DbSet<PodEntity> Entities { get; set; }
+    public virtual DbSet<NodeEntity> Nodes { get; set; }
 
-    public virtual DbSet<PodMetrics> Metrics { get; set; }
+    public virtual DbSet<PodEntity> Pods { get; set; }
+
+    public virtual DbSet<Domain.ValueObjects.Metrics> Metrics { get; set; }
 }

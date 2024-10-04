@@ -6,7 +6,7 @@ public class PodEntityRepository(ApplicationContext context) : EntityFrameworkRe
     {
         return await Task.Factory.StartNew(() =>
         {
-            return _context.Entities.AsQueryable()
+            return _context.Pods.AsQueryable()
                 .AsNoTracking()
                 .Where(filter)
                 .Include(i => i.Metrics)
@@ -16,7 +16,7 @@ public class PodEntityRepository(ApplicationContext context) : EntityFrameworkRe
 
     public async Task<PodEntity?> GetAsync(Guid entityId, CancellationToken ct = default)
     {
-        var entity = await _context.Entities.FindAsync(entityId, ct);
+        var entity = await _context.Pods.FindAsync(entityId, ct);
 
         if (entity is not null)
         {

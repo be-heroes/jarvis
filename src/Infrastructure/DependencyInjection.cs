@@ -66,6 +66,8 @@ public static class DependencyInjection
     /// <param name="services">The IServiceCollection to add the repositories to.</param>
     private static void AddRepositories(this IServiceCollection services)
     {
+        services.AddTransient<IRepository<NodeEntity>, NodeEntityRepository>();
+        services.AddTransient<INodeEntityRepository, NodeEntityRepository>();
         services.AddTransient<IRepository<PodEntity>, PodEntityRepository>();
         services.AddTransient<IPodEntityRepository, PodEntityRepository>();
     }

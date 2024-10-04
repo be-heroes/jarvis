@@ -1,6 +1,7 @@
 // Global using directives
 
 global using Application;
+global using Application.Commands.Node;
 global using Application.Commands.Pod;
 global using Application.Telemetry;
 global using Domain.Aggregates;

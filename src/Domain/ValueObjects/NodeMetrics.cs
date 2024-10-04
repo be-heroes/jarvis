@@ -1,12 +1,8 @@
 namespace Domain.ValueObjects;
 
 [method: JsonConstructor]
-public sealed class NodeMetrics(string label, double cpuTotal, double memoryTotal) : ValueObject
+public sealed class NodeMetrics(string label, double cpuTotal, double memoryTotal) : Metrics(label)
 {
-    [Required]
-    [JsonPropertyName("label")]
-    public string Label { get; init; } = label;
-
     [Required]
     [JsonPropertyName("cpuTotal")]
     public double CpuTotal { get; init; } = cpuTotal;
@@ -17,7 +13,7 @@ public sealed class NodeMetrics(string label, double cpuTotal, double memoryTota
 
     protected override IEnumerable<object> GetAtomicValues()
     {
-        yield return Label;
+        yield return base.GetAtomicValues();
         yield return CpuTotal;
         yield return MemoryTotal;
     }

@@ -1,12 +1,8 @@
 namespace Domain.ValueObjects;
 
 [method: JsonConstructor]
-public sealed class PodMetrics(string label, double cpuUsage, double memoryUsage) : ValueObject
+public sealed class PodMetrics(string label, double cpuUsage, double memoryUsage) : Metrics(label)
 {
-    [Required]
-    [JsonPropertyName("label")]
-    public string Label { get; init; } = label;
-
     [Required]
     [JsonPropertyName("cpuUsage")]
     public double CpuUsage { get; init; } = cpuUsage;
@@ -16,8 +12,8 @@ public sealed class PodMetrics(string label, double cpuUsage, double memoryUsage
     public double MemoryUsage { get; init; } = memoryUsage;
 
     protected override IEnumerable<object> GetAtomicValues()
-    {
-        yield return Label;
+    {        
+        yield return base.GetAtomicValues();
         yield return CpuUsage;
         yield return MemoryUsage;
     }
