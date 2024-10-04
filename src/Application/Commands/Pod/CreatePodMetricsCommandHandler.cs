@@ -1,6 +1,6 @@
 namespace Application.Commands.Pod;
 
-public sealed class CreateDomainObjectCommandHandler(IPodService podService) : ICommandHandler<CreatePodMetricsCommand, PodMetrics>
+public sealed class CreatePodMetricsCommandHandler(IPodService podService) : ICommandHandler<CreatePodMetricsCommand, PodMetrics>
 {
     private readonly IPodService _podService = podService ?? throw new ArgumentNullException(nameof(podService));
 

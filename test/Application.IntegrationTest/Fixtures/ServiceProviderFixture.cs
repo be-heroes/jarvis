@@ -1,4 +1,6 @@
-﻿namespace Application.IntegrationTest.Fixtures;
+﻿using BeHeroes.CodeOps.Abstractions.Data;
+
+namespace Application.IntegrationTest.Fixtures;
 
 public class ServiceProviderFixture : IDisposable
 {
@@ -9,6 +11,12 @@ public class ServiceProviderFixture : IDisposable
         var services = new ServiceCollection();
 
         services.AddApplication();
+
+        var repositoryMock = new Mock<IPodEntityRepository>();
+
+        repositoryMock.Setup(x => x.UnitOfWork).Returns(new Mock<IUnitOfWork>().Object);
+
+        services.AddTransient((services) => { return repositoryMock.Object; });
 
         Provider = services.BuildServiceProvider();
     }

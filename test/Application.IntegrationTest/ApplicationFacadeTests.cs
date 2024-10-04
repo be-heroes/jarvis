@@ -14,7 +14,7 @@ public class ApplicationFacadeTests : IClassFixture<ServiceProviderFixture>
     {
         //Arrange
         var sut = _serviceProviderFixture.Provider.GetService<IApplicationFacade>();
-        var testCommand = new CreatePodEntityCommand([]);
+        var testCommand = new CreatePodEntityCommand("podSelector", []);
 
         //Act
         var result = await sut.Execute(testCommand);

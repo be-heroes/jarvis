@@ -4,7 +4,7 @@ public class IIntegrationEventToPodEntityConverter(IMapper mapper, IPodService p
 {
     public readonly IMapper _mapper = mapper;
 
-    public readonly IPodService _domainService = podService ?? throw new ArgumentNullException(nameof(podService));
+    public readonly IPodService _podService = podService ?? throw new ArgumentNullException(nameof(podService));
 
     public PodEntity Convert(IIntegrationEvent source, PodEntity destination, ResolutionContext context)
     {
@@ -33,7 +33,7 @@ public class IIntegrationEventToPodEntityConverter(IMapper mapper, IPodService p
 
         if(Guid.TryParse(payload?.GetProperty("id").GetString(), out var entityId))
         {
-            var getEntityTask = _domainService.GetPodEntityByIdAsync(entityId);
+            var getEntityTask = _podService.GetPodEntityByIdAsync(entityId);
 
             getEntityTask.Wait();
 
