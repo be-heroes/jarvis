@@ -7,6 +7,7 @@ global using BeHeroes.CodeOps.Abstractions.Repositories;
 global using BeHeroes.CodeOps.Abstractions.Services;
 global using Domain.Aggregates;
 global using Domain.Events.Pod;
+global using Domain.Events.Node;
 global using Domain.ValueObjects;
 global using System.ComponentModel.DataAnnotations;
 global using System.Text.Json.Serialization;
