@@ -12,7 +12,7 @@ public class ChroniclerService(ILogger<ChroniclerService> logger) : BackgroundSe
             
             await foreach (var pod in GetPodMetrics(stoppingToken))
             {
-                // TODO: Persist pod metrics to DB
+                // TODO: Persist pod entities with metrics to DB
             }
 
             _logger.LogInformation("Chronicled pod metrics...");
@@ -33,7 +33,7 @@ public class ChroniclerService(ILogger<ChroniclerService> logger) : BackgroundSe
             var memoryUsage = pod.Containers.Sum(c => c.Usage["memory"].ToDouble());
             var CpuUsage = pod.Containers.Sum(c => c.Usage["cpu"].ToDouble());
 
-            yield return new Domain.ValueObjects.PodMetrics(labelString, pod.Metadata.Name, CpuUsage, memoryUsage);
+            yield return new Domain.ValueObjects.PodMetrics(labelString, CpuUsage, memoryUsage);
         }
     }
 }

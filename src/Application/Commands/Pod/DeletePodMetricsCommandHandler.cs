@@ -6,6 +6,6 @@ public sealed class DeletePodMetricsCommandHandler(IPodService podService) : ICo
 
     public async Task<bool> Handle(DeletePodMetricsCommand command, CancellationToken cancellationToken = default)
     {
-        return await _podService.DeletePodMetricsAsync(command.EntityId, command.PodSelector, command.Label, cancellationToken);
+        return await _podService.DeletePodMetricsAsync(command.EntityId, command.Label, cancellationToken);
     }
 }

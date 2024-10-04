@@ -33,7 +33,7 @@ public class CostServiceTests
         var sut = new PodService(mockRepository.Object);
 
         //Act
-        var result = await sut.AddPodEntityAsync("podSelector", new[] { new PodMetrics("label", "podSelector", 2.0, 2.0) });
+        var result = await sut.AddPodEntityAsync("podSelector", [new PodMetrics("label", 2.0, 2.0)]);
 
         //Assert
         Assert.NotNull(result);
@@ -79,7 +79,7 @@ public class CostServiceTests
         var sut = new PodService(mockRepository.Object);
 
         //Act
-        await sut.DeletePodMetricsAsync(Guid.NewGuid(), "a", "b");
+        await sut.DeletePodMetricsAsync(Guid.NewGuid(), "a");
 
         //Assert
         Mock.VerifyAll();

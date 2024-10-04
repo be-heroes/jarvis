@@ -6,6 +6,6 @@ public sealed class UpdatePodMetricsCommandHandler(IPodService podService) : ICo
 
     public async Task<PodMetrics> Handle(UpdatePodMetricsCommand command, CancellationToken cancellationToken = default)
     {
-        return await _podService.AddOrUpdatePodMetricsAsync(command.EntityId, command.Label, command.PodSelector, command.CpuUsage, command.MemoryUsage, cancellationToken);
+        return await _podService.AddOrUpdatePodMetricsAsync(command.EntityId, command.Label, command.CpuUsage, command.MemoryUsage, cancellationToken);
     }
 }

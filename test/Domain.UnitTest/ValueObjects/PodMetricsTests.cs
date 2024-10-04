@@ -9,12 +9,11 @@ public class PodMetricsTests
         PodMetrics sut;
 
         //Act
-        sut = new PodMetrics("label", "podSelector", 2.0, 2.0);
+        sut = new PodMetrics("label", 2.0, 2.0);
 
         //Assert
         Assert.NotNull(sut);
         Assert.Equal("label", sut.Label);
-        Assert.Equal("podSelector", sut.PodSelector);
         Assert.Equal(2.0, sut.CpuUsage);
         Assert.Equal(2.0, sut.MemoryUsage);
     }
@@ -23,7 +22,7 @@ public class PodMetricsTests
     public void CanBeSerialized()
     {
         //Arrange
-        var sut = new PodMetrics("label", "podSelector", 2.0, 2.0);
+        var sut = new PodMetrics("label", 2.0, 2.0);
 
         //Act
         var payload = JsonSerializer.Serialize(sut, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
@@ -39,12 +38,11 @@ public class PodMetricsTests
         PodMetrics sut;
 
         //Act
-        sut = JsonSerializer.Deserialize<PodMetrics>("{\"label\":\"label\",\"podSelector\":\"podSelector\",\"cpuUsage\":2.0,\"memoryUsage\":2.0}");
+        sut = JsonSerializer.Deserialize<PodMetrics>("{\"label\":\"label\",\"cpuUsage\":2.0,\"memoryUsage\":2.0}");
 
         //Assert
         Assert.NotNull(sut);
         Assert.Equal("label", sut.Label);
-        Assert.Equal("podSelector", sut.PodSelector);
         Assert.Equal(2.0, sut.CpuUsage);
         Assert.Equal(2.0, sut.MemoryUsage);
     }

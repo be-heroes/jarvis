@@ -1,11 +1,8 @@
 namespace Application.Commands.Pod;
 
 [method: JsonConstructor]
-public sealed class UpdatePodMetricsCommand(string label, string podSelector, double cpuUsage, double memoryUsage, Guid entityId) : ICommand<PodMetrics>
+public sealed class UpdatePodMetricsCommand(string label, double cpuUsage, double memoryUsage, Guid entityId) : ICommand<PodMetrics>
 {
-    [JsonPropertyName("podSelector")]
-    public string PodSelector { get; init; } = podSelector;
-
     [JsonPropertyName("entityId")]
     public Guid EntityId { get; init; } = entityId;
 

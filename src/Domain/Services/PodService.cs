@@ -60,9 +60,9 @@ public sealed class PodService(IPodEntityRepository podEntityRepository) : IPodS
         return await _podEntityRepository.UnitOfWork.SaveEntitiesAsync(ct);
     }
 
-    public async Task<PodMetrics> AddOrUpdatePodMetricsAsync(Guid entityId, string label, string podSelector, double cpuUsage, double memoryUsage, CancellationToken ct = default)
+    public async Task<PodMetrics> AddOrUpdatePodMetricsAsync(Guid entityId, string label, double cpuUsage, double memoryUsage, CancellationToken ct = default)
     {
-        var metrics = new PodMetrics(label, podSelector, cpuUsage, memoryUsage);
+        var metrics = new PodMetrics(label, cpuUsage, memoryUsage);
         var entity = await _podEntityRepository.GetAsync(entityId, ct);
 
         if (entity is not null && entity.Metrics != null && !entity.Metrics.Any(o => o.Equals(metrics)))
@@ -75,13 +75,13 @@ public sealed class PodService(IPodEntityRepository podEntityRepository) : IPodS
         return metrics;
     }
 
-    public async Task<bool> DeletePodMetricsAsync(Guid entityId, string podSelector, string? label, CancellationToken ct = default)
+    public async Task<bool> DeletePodMetricsAsync(Guid entityId, string? label, CancellationToken ct = default)
     {
         var entity = await _podEntityRepository.GetAsync(entityId, ct);
 
         if (entity is not null)
         {
-            var query = entity.Metrics.Where(ci => ci.PodSelector == podSelector).AsQueryable();
+            var query = entity.Metrics.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(label))
                 query = query.Where(ci => ci.Label == label);
