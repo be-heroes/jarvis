@@ -30,6 +30,7 @@ public static class DependencyInjection
 
     private static void AddServices(this IServiceCollection services)
     {
+        services.AddTransient<INodeService, NodeService>();
         services.AddTransient<IPodService, PodService>();
     }
 }

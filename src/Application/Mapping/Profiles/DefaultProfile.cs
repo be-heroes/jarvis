@@ -15,5 +15,8 @@ public sealed class DefaultProfile : Profile
 
         CreateMap<IIntegrationEvent, PodEntity>()
         .ConvertUsing<IIntegrationEventToPodEntityConverter>();
+
+        CreateMap<IIntegrationEvent, NodeEntity>()
+        .ConvertUsing<IIntegrationEventToNodeEntityConverter>();
     }
 }

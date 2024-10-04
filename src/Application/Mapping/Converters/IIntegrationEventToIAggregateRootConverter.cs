@@ -8,6 +8,7 @@ public class IIntegrationEventToIAggregateRootConverter(IMapper mapper) : ITypeC
     {
         return source.Type switch
         {
+            "externally_mutated_node_entity_integration_event" => _mapper.Map<NodeEntity>(source),
             "externally_mutated_pod_entity_integration_event" => _mapper.Map<PodEntity>(source),
             _ => throw new NotSupportedException($"The integration event type {source.Type} is not supported.")
         };

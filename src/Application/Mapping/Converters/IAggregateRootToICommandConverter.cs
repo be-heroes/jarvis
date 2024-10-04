@@ -6,6 +6,17 @@ public class IAggregateRootToICommandConverter : ITypeConverter<IAggregateRoot, 
     {
         switch (source)
         {
+            case NodeEntity entity:
+                if (entity.Id == Guid.Empty)
+                {
+                    destination = new CreateNodeEntityCommand(entity.NodeSelector, entity.Metrics);
+                }
+                else
+                {
+                    destination = new UpdateNodeEntityCommand(entity);
+                }
+
+                break;
             case PodEntity entity:
                 if (entity.Id == Guid.Empty)
                 {
