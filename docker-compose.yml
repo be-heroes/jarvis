@@ -8,7 +8,7 @@ services:
     environment:
       GITHUB_TOKEN: ${GITHUB_TOKEN}
     networks:
-      - ultron
+      - jarvis
     ports:
       - "54323:54323"
       - "54324:54324"
@@ -24,7 +24,7 @@ services:
     environment:
       GITHUB_TOKEN: ${GITHUB_TOKEN}
     networks:
-      - ultron
+      - jarvis
     depends_on:
       - database-migration-runner
       - kafka-topic-runner
@@ -35,7 +35,7 @@ services:
     container_name: database
     hostname: database
     networks:
-      - ultron
+      - jarvis
     environment:
       - "POSTGRES_USER=postgres"
       - "POSTGRES_PASSWORD=local"
@@ -47,7 +47,7 @@ services:
     environment:
       GITHUB_TOKEN: ${GITHUB_TOKEN}
     networks:
-      - ultron
+      - jarvis
     volumes:
       - ./:/app
     command:
@@ -65,7 +65,7 @@ services:
     hostname: kafka
     container_name: kafka
     networks:
-      - ultron
+      - jarvis
     ports:
       - "9092:9092"
       - "29092:29092"
@@ -90,7 +90,7 @@ services:
   kafka-topic-runner:
     image: confluentinc/cp-kafka:7.5.3
     networks:
-      - ultron
+      - jarvis
     entrypoint: [ '/bin/sh', '-c' ]
     command: |
       "
@@ -112,7 +112,7 @@ services:
     hostname: kafka-schema-registry
     container_name: kafka-schema-registry
     networks:
-      - ultron
+      - jarvis
     ports:
       - "8081:8081"
     environment:
@@ -127,7 +127,7 @@ services:
     hostname: zoo
     container_name: zoo
     networks:
-      - ultron
+      - jarvis
     ports:
       - "2181:2181"
     environment:
@@ -136,4 +136,4 @@ services:
       ZOOKEEPER_SERVERS: zoo:2888:3888
       
 networks:
-  ultron:
+  jarvis:
