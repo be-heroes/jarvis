@@ -11,12 +11,9 @@ public class PodEntityTypeConfiguration : IEntityTypeConfiguration<PodEntity>
         builder.HasKey(v => v.Id);
         builder.ToTable("PodEntity");
 
-        builder.OwnsMany(
-            p => p.Metrics, a =>
-            {
-                a.WithOwner().HasForeignKey("OwnerId");
-                a.Property<Guid>("Id");
-                a.HasKey("Id");
-            });
+        builder.HasMany(v => v.Metrics)
+            .WithOne()
+            .HasForeignKey("PodId")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

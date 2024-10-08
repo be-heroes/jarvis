@@ -11,12 +11,9 @@ public class NodeEntityTypeConfiguration : IEntityTypeConfiguration<NodeEntity>
         builder.HasKey(v => v.Id);
         builder.ToTable("NodeEntity");
 
-        builder.OwnsMany(
-            p => p.Metrics, a =>
-            {
-                a.WithOwner().HasForeignKey("OwnerId");
-                a.Property<Guid>("Id");
-                a.HasKey("Id");
-            });
+        builder.HasMany(v => v.Metrics)
+            .WithOne()
+            .HasForeignKey("NodeId")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
